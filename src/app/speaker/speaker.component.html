@@ -1,0 +1,52 @@
+<div class="sticky-page-header">
+  <div class="spinner_new" *ngIf="loading">
+    <div class="testspinner">
+      <i class="fa fa-spinner fa-spin fa-fw fa-5x"></i>
+    </div>
+  </div>
+  <!-- <div style="font-size: medium;text-align: center;">
+    {{"Login Form"}}
+  </div> -->
+</div>
+<div class="mt-5">
+  <form [formGroup]="Speakerform">
+    <div class="container">
+      <div class="card col-md-8">
+        <div style=" font-size: larger;text-align: center;background-color: #23b7e5;color: white;"><b>Add Speaker
+            Details</b>
+        </div>
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <label class="form-label"><b>Speaker Name:</b></label>
+              <input type="text" class="form-control" id="speakername" formControlName="SpeakerName"
+                placeholder="Enter speaker name" required>
+              <span
+                *ngIf="Speakerform.get('SpeakerName').hasError('required') && (Speakerform.get('SpeakerName').dirty || Speakerform.get('SpeakerName').touched)">
+                <p class="text-danger">Speaker Name is required.</p>
+              </span>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <label class="form-label"><b>Session Name:</b></label>
+
+              <select class="form-control" formControlName="SessionId">
+                <option value="" selected>Select Session</option>
+                <option *ngFor="let session of SessionList" [value]="session.SessionId">{{ session.SessionName }}
+                </option>
+              </select>
+
+            </div>
+          </div>
+          <div class="mt-5 " style="justify-content: space-between; margin-left: 175px;">
+            <button type="button" class="btn btn-danger" style="margin-left: 5px" (click)="onCancel()">Cancel</button>
+            <button type="button" class="btn btn-primary" style="margin-left: 5px" (click)="onSubmit()">Submit</button>
+            <button type="button" class="btn btn-danger" style="margin-left: 5px" (click)="onBack()">Back</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

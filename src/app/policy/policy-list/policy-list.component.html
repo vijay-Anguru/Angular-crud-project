@@ -1,0 +1,46 @@
+<div class="sticky-page-header">
+  <div class="spinner_new" *ngIf="loading">
+    <div class="testspinner">
+      <i class="fa fa-spinner fa-spin fa-fw fa-5x"></i>
+    </div>
+  </div>
+  <div class="list" style="font-size: medium;text-align: start;">
+    <b>{{"List of Policy Details"}}</b>
+  </div>
+</div>
+<div class="container mt-5">
+  <h2>Policy Details</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>PolicyId</th>
+        <th>Policy Name</th>
+        <th>Description</th>
+        <th>Policy Written By</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of policyList; let i = index">
+        <td>{{ entry.PolicyId }}</td>
+        <td>{{ entry.PolicyName }}</td>
+        <td>{{ entry.Description }}</td>
+        <td>{{ policyMap[entry.PolicyWrittenBy]}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="onEdit(entry.PolicyId)">
+            <i class="fa fa-edit"></i>Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="delete(entry.PolicyId)">
+            <i class="fa fa-trash"></i>Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <button type="button" class="btn btn-danger" (click)="onBack()">Back</button>
+  </div>
+</div>

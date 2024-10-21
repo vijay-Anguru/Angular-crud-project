@@ -1,0 +1,73 @@
+<div class="sticky-page-header">
+  <div class="spinner_new" *ngIf="loading">
+    <div class="testspinner">
+      <i class="fa fa-spinner fa-spin fa-fw fa-5x"></i>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <form [formGroup]="Eventform">
+    <div class="container">
+      <div class="card col-md-8" style="margin-left: 50px;">
+        <div class="card-header" style="background-color: #23b7e5;color: white;"><b>
+            Add Event Details</b>
+        </div>
+        <div class="card-body">
+          <div class="row">
+          <div class="form-group col-md-6">
+            <label class="form-label"><b>Event Name:</b></label>
+            <input type="text" class="form-control" id="eventname" formControlName="EventName"
+              placeholder="Enter Event Name">
+            <span
+              *ngIf="Eventform.get('EventName').hasError('required') && (Eventform.get('EventName').dirty || Eventform.get('EventName').touched)">
+              <p class="text-danger">Event Name is required.</p>
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label class="form-label"><b>Location: </b></label>
+            <input type="text" class="form-control" id="location" formControlName="location"
+              placeholder="Enter Location">
+            <span
+              *ngIf="Eventform.get('location').hasError('required') && (Eventform.get('location').dirty || Eventform.get('location').touched)">
+              <p class="text-danger">Location is required.</p>
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label class="form-label"><b>Description:</b></label>
+            <input type="text" class="form-control" id="Description" formControlName="Description"
+              placeholder="Enter Description">
+            <span
+              *ngIf="Eventform.get('Description').hasError('required') && (Eventform.get('Description').dirty || Eventform.get('Description').touched)">
+              <p class="text-danger">Description is required.</p>
+            </span>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label class="form-label"><b>Organizer: </b></label>
+            <input type="text" class="form-control" id="Organizer" formControlName="Organizer"
+              placeholder="Enter Organizer">
+            <span
+              *ngIf="Eventform.get('Organizer').hasError('required') && (Eventform.get('Organizer').dirty || Eventform.get('Organizer').touched)">
+              <p class="text-danger">Organizer is required.</p>
+            </span>
+          </div>
+          <div class="row " style="justify-content: center;">
+            <div class="col-10 mt-3">
+              <div class="button-group">
+                <button type="button" class="btn btn-danger" style="margin-left: 10px"
+                  (click)="onCancel()">Cancel</button>
+                <button type="button" class="btn btn-primary" style="margin-left: 10px"
+                  (click)="onSubmit()">Submit</button>
+                <button type="button" class="btn btn-danger" style="margin-left: 10px" (click)="onBack()">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

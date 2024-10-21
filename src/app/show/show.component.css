@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column; /* Stack the button row and the back button */
+  align-items: center; /* Center align all items */
+  padding-top: 50px;
+  text-align: center;
+}
+
+.button-row {
+  display: flex; /* Display button columns side by side */
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px; /* Space between columns */
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 15px; /* Adjust padding for height */
+  width: 150px; /* Set fixed width for equal length */
+  margin: 10px 0; /* Space between buttons in a column */
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #23b7e5;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1e9acb;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

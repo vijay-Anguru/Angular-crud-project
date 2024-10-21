@@ -1,0 +1,57 @@
+<div class="sticky-page-header">
+  <div class="spinner_new" *ngIf="loading">
+    <div class="testspinner">
+      <i class="fa fa-spinner fa-spin fa-fw fa-5x"></i>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <form [formGroup]="Sessionform">
+    <div class="container">
+      <div class="card">
+        <div class="card-header" style="height:60px; text-align: center;background-color: #23b7e5;color: white;">
+          <h3> <b>Add Session Details</b></h3>
+        </div>
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="col-5">
+              <div class="form-group">
+                <label class="form-label"><b>Session Name:</b></label>
+                <input type="text" class="form-control" id="SessionName" formControlName="SessionName"
+                  placeholder="Enter session name" required>
+                <span
+                  *ngIf="Sessionform.get('SessionName').hasError('required') && (Sessionform.get('SessionName').dirty || Sessionform.get('SessionName').touched)">
+                  <p class="text-danger">Session Name is required.</p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-5">
+              <label class="form-label"><b>Event Name:</b></label>
+              <!-- </div>
+            <div class="col-5"> -->
+              <select formControlName="EventId" class="form-control">
+                <option value="">Select Event</option>
+                <option *ngFor="let event of EventList" [value]="event.EventId">{{ event.EventName }}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+              <div class="button-group">
+                <button type="button" class="btn btn-danger" style="margin-left: 10px"
+                  (click)="onCancel()">Cancel</button>
+                <button type="button" class="btn btn-primary" style="margin-left: 10px"
+                  (click)="onSubmit()">Submit</button>
+                <button type="button" class="btn btn-danger" style="margin-left: 10px" (click)="onBack()">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

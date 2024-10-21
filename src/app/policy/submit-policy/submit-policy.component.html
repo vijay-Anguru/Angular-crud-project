@@ -1,0 +1,142 @@
+<div class="sticky-page-header">
+  <div class="content-heading" style="display: flex;
+    justify-content: center;background-color: #23b7e5;padding: 10px;">
+    <div>
+      <label style=" font-size: larger;background-size:100px;"><b>Policy Details</b></label>
+    </div>
+  </div>
+</div>
+<div class="card card-default" style="margin-top: 30px;">
+  <div class="card-body">
+    <div>
+      <form [formGroup]="policyForm">
+        <div class="row">
+          <div class="col-md-3">
+            <label><b>Reference No.:</b></label>
+            <input type="text" class="form-control" formControlName="ReferenceNo" placeholder="Auto Generated" readonly>
+          </div>
+          <div class="col-md-3">
+            <label class=""><b>Policy Name :<span class="text-danger">*</span></b></label>
+            <input type="text" class="form-control" formControlName="PolicyName" placeholder="Enter Policy Name">
+            <div
+              *ngIf="policyForm['controls']['PolicyName'].hasError('required') && (policyForm['controls']['PolicyName'].dirty || policyForm['controls']['PolicyName'].touched)">
+              <p class="text-danger">Policy Name is required</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <label class=""><b>Policy Description/Rules :<span class="text-danger">*</span></b></label>
+            <div class="">
+              <textarea #policyRuleTextarea id="policyRuleTextarea" class="form-control"
+                placeholder="Enter Policy Description" rows="1" formControlName="Description"></textarea>
+            </div>
+            <div
+              *ngIf="policyForm['controls']['Description'].hasError('required') && (policyForm['controls']['Description'].dirty || policyForm['controls']['Description'].touched)">
+              <p class="text-danger">Description is required</p>
+            </div>
+          </div>
+          <div class="col-md-3 mt-4">
+            <label class="form-label"><strong>Department :</strong><span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="DepartmentId">
+              <option value="" selected>Select Department</option>
+              <option *ngFor="let department of departmentOptions" [value]="department.DepartmentId">{{
+                department.DepartmentName}}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['DepartmentId'].hasError('required') && (policyForm['controls']['DepartmentId'].dirty || policyForm['controls']['DepartmentId'].touched)">
+              <p class="text-danger">Department is required</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <label class="form-label"><b>Folder :<span class="text-danger">*</span></b></label>
+            <select class="form-control" formControlName="FolderId" (change)="onFolderChange()" (load)="onFolderChange">
+              <option value="" selected>Select Folder</option>
+              <option *ngFor="let folder of folderOptions" [value]="folder.FolderId">
+                {{ folder.FolderName }}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['FolderId'].hasError('required') && (policyForm['controls']['FolderId'].dirty || policyForm['controls']['FolderId'].touched)">
+              <p class="text-danger">Folder is required</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <label class="form-label"><b>Sub-Folder :<span class="text-danger">*</span></b></label>
+            <select class="form-control" formControlName="SubFolderId">
+              <option value="" selected>Select Sub-Folder</option>
+              <option *ngFor="let subfolder of getSubFolder" [value]="subfolder.SubFolderId">
+                {{ subfolder.SubFolderName }}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['SubFolderId'].hasError('required') && (policyForm['controls']['SubFolderId'].dirty || policyForm['controls']['SubFolderId'].touched)">
+              <p class="text-danger">Sub-Folder is required</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <label class="form-label"><b>Reviewer :<span class="text-danger">*</span></b></label>
+            <select class="form-control" formControlName="ReviewerId">
+              <option value="" selected>Select Reviewer</option>
+              <option *ngFor="let employee of employeeOptions" [value]="employee.EmployeeId">
+                {{ employee.FirstName }} {{ employee.MiddleName }} {{ employee.LastName }} - {{employee.EmployeeCode}}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['ReviewerId'].hasError('required') && (policyForm['controls']['ReviewerId'].dirty || policyForm['controls']['ReviewerId'].touched)">
+              <p class="text-danger">Reviewer is required</p>
+            </div>
+          </div>
+          <div class="col-md-3 mt-4">
+            <label><b>Date of Policy Made :<span class="text-danger">*</span></b></label>
+            <input type="date" class="form-control" [min]="currentDate" formControlName="CreatedDate" />
+            <div
+              *ngIf="policyForm['controls']['CreatedDate'].hasError('required') && (policyForm['controls']['CreatedDate'].dirty || policyForm['controls']['CreatedDate'].touched)">
+              <p class="text-danger">Created Date is required</p>
+            </div>
+          </div>
+          <div class="col-md-3 mt-3">
+            <label class="form-label"><b>Regulation By :<span class="text-danger">*</span></b></label>
+            <select formControlName="RegulationById" class="form-control">
+              <option value="" selected>Select Regulation</option>
+              <option *ngFor="let option of regulationByOptions" [value]="option.RegulationById">
+                {{ option.RegulationByName }}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['RegulationById'].hasError('required') && (policyForm['controls']['RegulationById'].dirty || policyForm['controls']['RegulationById'].touched)">
+              <p class="text-danger">Regulation By is required</p>
+            </div>
+          </div>
+          <div class="col-md-3 mt-3">
+            <label class="form-label">Policy Written By :<span class="text-danger">*</span></label>
+            <select formControlName="PolicyWrittenBy" class="form-control">
+              <option value="" selected>Select Writer</option>
+              <option *ngFor="let employee of employeeOptions" [value]="employee.EmployeeId">
+                {{ employee.FirstName }} {{ employee.MiddleName }} {{ employee.LastName }} - {{employee.EmployeeCode}}
+              </option>
+            </select>
+            <div
+              *ngIf="policyForm['controls']['PolicyWrittenBy'].hasError('required') && (policyForm['controls']['PolicyWrittenBy'].dirty || policyForm['controls']['PolicyWrittenBy'].touched)">
+              <p class="text-danger">Policy Written By is required</p>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-12 text-center">
+              <button class="btn bg-danger mr-2" (click)="Cancel()"><i class="fa fa-times mr-2"></i>Cancel</button>
+              <button class="btn btn-primary mx-2" style="background-color: #23b7e5;" (click)="OnSubmit()">
+                <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i> Submit
+              </button>
+              <button class="btn btn-danger mx-1" (click)="goBack()">
+                <i class="fa fa-arrow-left mr-2"></i> Back
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
